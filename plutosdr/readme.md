@@ -1,7 +1,6 @@
 # Installing on PlutoSDR
-
+# In Terminal 1
 ## Launching container
-
 ```
 apt update
 ```
@@ -15,7 +14,6 @@ apt-get install linux-tools-generic
 ```
 (installing also linux-tools--tools-generic by taping command cpupower)
 
-# In Terminal 1
 ```
 cpupower frequency-set -g performance 
 ```
