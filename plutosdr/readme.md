@@ -124,7 +124,7 @@ docker exec -ti btspluto python3 osmo-nitb-scripts/main_uhd_spoof.py
 Tape ctrl+shift+T   </br>
 
 # In terminal 3
-## Testing USRP SpoofScript1
+## Testing PlutoSDR SpoofScript1
 ```
 docker exec -ti btspluto bash osmo-nitb-scripts/scripts_spoof1/finding_imsi_extenstion.sh```
 ```
@@ -149,7 +149,7 @@ docker exec -ti btspluto  python2 osmo-nitb-scripts/scripts_spoof1/sending_sms_b
 ```
 log should be : subscriber extension 0341220590 sms sender extension 0341220590 send ALERT Corona virus
 
-## Testing USRP SpoofScript2
+## Testing PlutoSDR SpoofScript2
 ```
 docker exec -ti btspluto python2 osmo-nitb-scripts/scripts_spoof2/show_subscribers.py 
 ```
@@ -178,7 +178,7 @@ You could find imsi and extension
 docker exec -ti btspluto  python2 osmo-nitb-scripts/scripts_spoof2/show_subscribers.py
 ```
 
-## Testing USRP Fake SMS Sender
+## Testing PlutoSDR Fake SMS Sender
 # In terminal 1
 
 ```
