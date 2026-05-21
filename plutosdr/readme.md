@@ -113,6 +113,7 @@ docker exec -ti btspluto bash -c 'osmo-trx-soapy -C /opt/src/fork_osmo-trx_soapy
 ```
 Tape ctrl+shift+T   </br>
 
+# In terminal 2
 launch service   :
 ```
 docker exec -ti btspluto bash -c 'cd osmo-nitb-scripts && bash install_services.sh'
@@ -120,8 +121,9 @@ docker exec -ti btspluto bash -c 'cd osmo-nitb-scripts && bash install_services.
 ```
 docker exec -ti btspluto python3 osmo-nitb-scripts/main_uhd_spoof.py
 ```
+Tape ctrl+shift+T   </br>
 
-
+# In terminal 3
 ## Testing USRP SpoofScript1
 ```
 docker exec -ti btspluto bash osmo-nitb-scripts/scripts_spoof1/finding_imsi_extenstion.sh```
@@ -177,6 +179,8 @@ docker exec -ti btspluto  python2 osmo-nitb-scripts/scripts_spoof2/show_subscrib
 ```
 
 ## Testing USRP Fake SMS Sender
+# In terminal 1
+
 ```
 ping 192.168.20.1
 ```
@@ -194,6 +198,8 @@ docker exec -ti btspluto bash -c 'osmo-trx-soapy -C /opt/src/fork_osmo-trx_soapy
 ```
 Tape ctrl+shift+T   </br>
 
+# In terminal 2
+
 launch service   :
 ```
 docker exec -ti btspluto bash -c 'cd osmo-nitb-scripts && bash install_services.sh'
@@ -202,6 +208,9 @@ docker exec -ti btspluto bash -c 'cd osmo-nitb-scripts && bash install_services.
 docker exec -ti btspluto python3 osmo-nitb-scripts/main_uhd.py
 ```
 Add victim phone and tape Tape ctrl+shift+T
+
+# In terminal 3
+
 ```
 docker exec -ti btspluto  cat osmo-nitb-scripts/interact.py
 ```
