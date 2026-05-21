@@ -17,8 +17,50 @@ apt-get install linux-tools-generic
 ```
 cpupower frequency-set -g performance 
 ```
+## Preparing PlutoSDR
+```
+lsusb
+```
+Verify if this log exist </br>
+`Bus 001 Device 006: ID 0456:b673 Analog Devices, Inc. LibIIO based AD9363 Software Defined Radio [ADALM-PLUTO]`  </br>
 
-# In the folder btspluto
+Launch : 
+```
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0456", ATTR{idProduct}=="b673", MODE="666"' | sudo tee /etc/udev/rules.d/90-libiio_pluto.rules
+```
+Then, 
+```
+sudo udevadm control --reload-rules
+```
+```
+sudo udevadm trigger
+```
+Unplug and replug PlutoSDR </br>
+Find the IP address of PlutoSDR </br> </br>
+```
+ping 192.168.20.1
+```
+or test ssh
+```
+ssh root@192.168.20.1
+```
+MDP is `analog`
+
+## Preparing Dockerfile
+```
+apt-get install wget docker.io
+```
+
+```
+mkdir btspluto
+```
+```
+cd btspluto
+```
+```
+wget https://raw.githubusercontent.com/SitrakaResearchAndPOC/Bulg2g_allsdr_docker/refs/heads/main/plutosdr/Dockerfile
+```
+## Building images
 
 ```
 docker build -t btspluto:v1 .
@@ -48,39 +90,23 @@ docker run -tid --privileged \
 xhost +
 ```
 
-
-# Testing driver
-```
-lsusb
-```
-Verify if this log exist </br>
-`Bus 001 Device 006: ID 0456:b673 Analog Devices, Inc. LibIIO based AD9363 Software Defined Radio [ADALM-PLUTO]`  </br>
-
-Launch : 
-```
-echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0456", ATTR{idProduct}=="b673", MODE="666"' | sudo tee /etc/udev/rules.d/90-libiio_pluto.rules
-```
-Then, 
-```
-sudo udevadm control --reload-rules
-```
-```
-sudo udevadm trigger
-```
-Unplug and replug PlutoSDR </br>
-Find the IP address of PlutoSDR </br> </br>
-```
-ping 192.168.20.1
-```
+## Testing PlutoSDR driver
 ```
 docker exec -ti btspluto bash -c 'ping 192.168.20.1'
 ```
+
+or test ssh
+```
+docker exec -ti btspluto bash -c 'ssh root@192.168.20.1'
+```
+MDP is `analog`
 ```
 docker exec -ti btspluto bash -c '$SRS_INSTALL/bin/SoapySDRUtil --info'
 ```
 ```
 docker exec -ti btspluto bash -c '$SRS_INSTALL/bin/SoapySDRUtil --find'
 ```
+## Launching transceiver
 ```
 docker exec -ti btspluto bash -c 'osmo-trx-soapy -C /opt/src/fork_osmo-trx_soapy/Transceiver52M/test1.cfg'
 ```
