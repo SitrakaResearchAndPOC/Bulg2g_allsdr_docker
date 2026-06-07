@@ -85,8 +85,9 @@ docker run -tid --privileged \
 CHECK USB CONFIGURATION
 ```
 docker exec -it bulk2g_pluto bash -c \
-'bash check_pluto_usb_cfg.sh /root/.config/srsran/enb.conf'
+'bash /osmobts/check_pluto_usb_cfg.sh /osmobts/fork_osmo-trx_soapy/Transceiver52M/test1.cfg'
 ```
+
 ### DIRECT ETHERENET
 [screen_shots_ethernet_direct](https://github.com/SitrakaResearchAndPOC/osmobts_allsdr_docker/tree/main/plutosdr/screen_shot_ethernet_direct)
 ```
@@ -118,9 +119,10 @@ docker run -tid --privileged \
   --hostname bulk2g_pluto \
   bulk2g_pluto:v1
 ```
+CHECK ETHERNET CONFIGURATION
 ```
 docker exec -it bulk2g_pluto bash -c \
-'bash check_pluto_network_cfg.sh  /root/.config/srsran/enb.conf'
+'bash /osmobts/check_pluto_network_cfg.sh /osmobts/fork_osmo-trx_soapy/Transceiver52M/test1.cfg'
 ```
 
 
